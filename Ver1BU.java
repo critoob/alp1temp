@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Ver1BU {
+public class Ver1 {
 // kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
     private static ArrayList<Double> mkn = new ArrayList<Double>();
@@ -75,6 +75,8 @@ public static void main(String[] args) {
     while (bulancounter < 13){
     try{
     System.out.println("================================");
+    String bulan = nobulan(bulancounter);
+    System.out.println("Bulan sekarang: "+bulan);    
     System.out.println("Menu: ");
     System.out.println("1. Tambah entry pengeluaran");
     System.out.println("2. Edit tabel / pengeluaran / pemasukan bulan ini");
@@ -87,8 +89,6 @@ public static void main(String[] args) {
 
     if (menu == 1){
     int reset = 0;
-    String bulan = nobulan(bulancounter);
-    System.out.println("Bulan sekarang: "+bulan);
         while (pertamangisibulan == 0){ //input target pengeluaran per bulan
         inputawalbulan();
         sisalltemp = lainlain.get(bulancounter-1);
@@ -175,6 +175,10 @@ public static void main(String[] args) {
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke uang Makan/Minum: ");
             Double fromtabung = s.nextDouble();
+                while (fromtabung <= 0){
+                System.out.print("Input invalid! Input jumlah uang yang ditransfer dari tabungan ke uang Makan/Minum: ");
+                fromtabung = s.nextDouble();
+                }
             totaltabung = totaltabung - fromtabung;
             sisamktemp = sisamktemp + fromtabung;
             }
@@ -200,6 +204,10 @@ public static void main(String[] args) {
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke uang Transportasi: ");
             Double fromtabung = s.nextDouble();
+                while (fromtabung <= 0){
+                System.out.print("Input invalid! Input jumlah uang yang ditransfer dari tabungan ke uang Transportasi: ");
+                fromtabung = s.nextDouble();
+                }
             totaltabung = totaltabung - fromtabung;
             sisatptemp = sisatptemp + fromtabung;
             }
@@ -225,6 +233,10 @@ public static void main(String[] args) {
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke uang Utilitas: ");
             Double fromtabung = s.nextDouble();
+                while (fromtabung <= 0){
+                System.out.print("Input invalid! Input jumlah uang yang ditransfer dari tabungan ke uang Utilitas: ");
+                fromtabung = s.nextDouble();
+                }
             totaltabung = totaltabung - fromtabung;
             sisauttemp = sisauttemp + fromtabung;
             }
@@ -250,6 +262,10 @@ public static void main(String[] args) {
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke pengeluaran lain - lain: ");
             Double fromtabung = s.nextDouble();
+                while (fromtabung <= 0){
+                System.out.print("Input invalid! Input jumlah uang yang ditransfer dari tabungan ke pengeluaran lain - lain: ");
+                fromtabung = s.nextDouble();
+                }
             totaltabung = totaltabung - fromtabung;
             sisalltemp = sisalltemp + fromtabung;
             }
@@ -345,8 +361,138 @@ public static void main(String[] args) {
     System.out.println("2. Edit pemasukan dan tabungan");
     System.out.print("Pilih: ");
     int input2  = s.nextInt();
+    while (input2 != 1 && input2 != 2 ){
+    System.out.print("Pilihan hanya 1 atau 2! Pilih: ");
+    input2  = s.nextInt();
+    }
         if (input2 == 1){
-        
+        bulan = nobulan(bulancounter);
+        System.out.println(""); //tabel lama here
+        System.out.println("================================");
+        System.out.println("");
+        System.out.println("\t\t\t    ===== Tabel Pengeluaran ======");
+        System.out.println("\tNama\t\t\t\tTipe\t\t\t\tJumlah");
+
+        for (int a = 0; a < nptemp.size(); a++){
+        System.out.print(a+1 +"\t");
+        if (nptemp.get(a).length() >= 8 && nptemp.get(a).length() < 16){
+        System.out.print(nptemp.get(a)+"\t\t\t");
+        }
+        else if (nptemp.get(a).length() >= 16 && nptemp.get(a).length() <= 20){
+        System.out.print(nptemp.get(a)+"\t\t");        
+        }
+        else if (nptemp.get(a).length() < 8){
+        System.out.print(nptemp.get(a)+"\t\t\t\t"); //less then 8
+        }
+           if (tptemp.get(a).equals("1") ||  tptemp.get(a).equals("2") || tptemp.get(a).equals("3")){
+           String tipe = buattipe(tptemp.get(a));
+           System.out.print(tipe+"\t\t\t");
+           }
+           else{
+                if (tptemp.get(a).length() >= 8 && tptemp.get(a).length() < 16){
+                System.out.print(tptemp.get(a)+"\t\t\t");
+                }
+                else if (tptemp.get(a).length() >= 16 && tptemp.get(a).length() <= 20){
+                System.out.print(tptemp.get(a)+"\t\t");        
+                }
+                else {
+                System.out.print(tptemp.get(a)+"\t\t\t\t"); //less then 8
+                }            
+           }
+        System.out.print("Rp. ");
+        if (hptemp.get(a) % 1 == 0){
+        System.out.printf("%.0f\n", hptemp.get(a));            
+        }
+        else {
+        System.out.printf("%.2f\n", hptemp.get(a));
+        }
+        }
+        System.out.println("");
+        System.out.print("Hapus / Edit baris (H/E) : ");
+        String hapusedit = s.next()+s.nextLine();
+            while (!hapusedit.equalsIgnoreCase("H") && !hapusedit.equalsIgnoreCase("E")){
+            System.out.print("Input hanya bisa H/E! Hapus / Edit baris: ");
+            hapusedit = s.next()+s.nextLine();
+            }
+        if (hapusedit.equalsIgnoreCase("H")){
+        System.out.print("Pilih baris untuk dihapus: ");
+        int pilihbaris = s.nextInt();
+        if (pilihbaris >= 1 && pilihbaris <= nptemp.size()) {
+            if (tptemp.get(pilihbaris - 1).equals("1")){
+                sisamktemp = sisamktemp + hptemp.get(pilihbaris - 1);
+            }
+            else if (tptemp.get(pilihbaris - 1).equals("2")){
+                sisatptemp = sisatptemp + hptemp.get(pilihbaris-1);
+            }
+            else if (tptemp.get(pilihbaris - 1).equals("3")){
+                sisauttemp = sisauttemp + hptemp.get(pilihbaris-1);
+            }
+            else {
+                sisalltemp = sisalltemp + hptemp.get(pilihbaris-1);
+            }          
+            nptemp.remove(pilihbaris - 1);
+            tptemp.remove(pilihbaris - 1);
+            hptemp.remove(pilihbaris - 1);
+            System.out.println("Baris " + pilihbaris + " berhasil dihapus!");
+        } else {
+            System.out.println("Baris yang dipilih invalid, tidak ada perubahan!");
+        }
+        } //end of hapus part
+        else if (hapusedit.equalsIgnoreCase("E")){
+        System.out.print("Pilih baris untuk diedit: ");
+        int pilihbaris = s.nextInt();
+        if (pilihbaris >= 1 && pilihbaris <= nptemp.size()) {
+            System.out.println("Baris "+pilihbaris+": "); //display that specific row
+            System.out.print(nptemp.get(pilihbaris-1)+"\t\t"+tptemp.get(pilihbaris-1)+"\t\t");
+                if (hptemp.get(pilihbaris-1) % 1 == 0){
+                System.out.printf("%.0f\n", hptemp.get(pilihbaris-1));            
+                }
+                else {
+                System.out.printf("%.2f\n", hptemp.get(pilihbaris-1));
+                }
+            System.out.println("");
+            System.out.println("Bagian yang ingin diedit: \n1. Nama\n2. Tipe\n3. Jumlah");
+            System.out.print("Pilih: ");
+            int partedit = s.nextInt();
+            while (partedit != 1 && partedit != 2 && partedit != 3){
+            System.out.print("Pilihan hanya bisa 1 - 3! Pilih bagian yang ingin diedit: ");
+            partedit = s.nextInt();
+            }
+            System.out.println("");
+            if (partedit == 1){
+            System.out.print("Input nama pengeluaran baru: ");
+            String inputbaris = s.next()+s.nextLine();
+            nptemp.set(pilihbaris-1, inputbaris);
+            }
+
+            else if (partedit == 2){
+            System.out.println("Tipe pengeluaran\n1. Makan/Minum\n2. Transportasi\n3. Utilitas\n4. Lain - lain (custom)");
+            System.out.print("Pilih tipe pengeluaran baru: ");
+            String inputbaris = s.next()+s.nextLine();
+            while (!inputbaris.equals("1") && !inputbaris.equals("2") && !inputbaris.equals("3") && !inputbaris.equals("4")){
+            System.out.print("Pilihan hanya 1-4! Pilih tipe pengeluaran baru: ");
+            inputbaris = s.next()+s.nextLine();
+            }
+                if (inputbaris.equals("4")){
+                System.out.print("Input tipe pengeluaran: ");
+                inputbaris = s.next()+s.nextLine();
+                }
+            tptemp.set(pilihbaris-1, inputbaris);
+            }
+
+            else if (partedit == 3){
+            System.out.print("Input jumlah pengeluaran baru: ");
+            Double inputbaris = s.nextDouble();
+            while (inputbaris <= 0){
+            System.out.print("Input invalid! Input jumlah pengeluaran baru: ");
+            inputbaris = s.nextDouble();
+            }
+            }
+        System.out.println("Perubahan berhasil!");
+        } else {
+            System.out.println("Baris yang dipilih invalid, tidak ada perubahan!");
+        }                
+        }
         }
         else if (input2 == 2){
         System.out.println("");
@@ -381,6 +527,10 @@ public static void main(String[] args) {
         
         System.out.print("Input jumlah yang ditarik: ");
         Double ambiltemp = s.nextDouble();
+        while (ambiltemp <= 0){
+        System.out.print("Input Anda invalid! Input jumlah yang ditarik: ");
+        ambiltemp = s.nextDouble();
+        }
             if (inputambil == 1){ // Uang diambil dari: 
                if (sisamktemp < ambiltemp){
                 System.out.println("Uang Makan/Minum Anda tidak cukup!");
@@ -477,7 +627,7 @@ public static void main(String[] args) {
     }
 
     else if (menu == 3){
-    String bulan = nobulan(bulancounter);
+    bulan = nobulan(bulancounter);
         if (pertamangisibulan == 0){
         System.out.println("Buat tabel baru terlebih dahulu!");
         System.out.println("");
@@ -558,8 +708,7 @@ public static void main(String[] args) {
         int inputbln3 = s.nextInt();
         if (inputbln3 >= 1 && inputbln3 <= namap.size()) {
         System.out.println("");
-        System.out.println("================================");
-        String bulan = nobulan(inputbln3);
+        bulan = nobulan(inputbln3);
         System.out.println("Bulan: "+bulan);
         System.out.print("Pemasukan: ");
             if (masukan.get(inputbln3-1) % 1 == 0){
@@ -636,6 +785,14 @@ public static void main(String[] args) {
     }
 
     else if (menu == 5){ //ganti bulan
+    System.out.println("Peringatan: Tabel pengeluaran bulan ini tidak bisa diedit setelah pindah bulan!");
+    System.out.print("Apakah Anda yakin mau pindah bulan? (Y/N): ");
+    String yesno4 = s.next()+s.nextLine();
+    while (!yesno4.equalsIgnoreCase("y") && !yesno4.equalsIgnoreCase("n")){
+    System.out.print("Input hanya bisa Y/N! Apakah Anda yakin mau pindah bulan?: ");
+    yesno4 = s.next()+s.nextLine();
+    }
+    if (yesno4.equalsIgnoreCase("y")){
                 {//clone temp to arraylist bulan
                 if (bulancounter == 1){
                 npjan = (ArrayList)nptemp.clone();
@@ -749,8 +906,14 @@ public static void main(String[] args) {
     sisatptemp = 0.0;
     sisauttemp = 0.0;
     tttemp = 0.0;
+    System.out.println("Bulan telah dipindah!");
     System.out.println("");
     System.out.println("");
+    }
+    else if (yesno4.equalsIgnoreCase("n")){
+    System.out.println("");
+    continue;
+    }
     }
 
     else if (menu == 6){
@@ -777,30 +940,69 @@ continue;
         Double masn = 1.0; Double mkn1 = 1.0; Double trpt1 = 1.0; Double util1 = 1.0; Double nb1 = 1.0; Double sisatemp;
         System.out.print("Input pemasukan uang untuk bulan ini: ");
         masn = s.nextDouble();
+            while (masn <= 0){
+            System.out.print("Input Anda invalid! Input pemasukan uang untuk bulan ini: ");
+            masn = s.nextDouble();
+            }
         System.out.print("Input target pengeluaran uang makan untuk bulan ini (jika tidak ada, tulis 0): ");
         mkn1 = s.nextDouble();
+            while (mkn1 < 0){
+            System.out.print("Input Anda invalid! Input target pengeluaran uang makan untuk bulan ini (jika tidak ada, tulis 0): ");
+            mkn1 = s.nextDouble();
+            }
         System.out.print("Input target pengeluaran uang transportasi untuk bulan ini (jika tidak ada, tulis 0): ");
         trpt1 = s.nextDouble();
+            while (trpt1 < 0){
+            System.out.print("Input Anda invalid! Input target pengeluaran uang transportasi untuk bulan ini (jika tidak ada, tulis 0): ");
+            trpt1 = s.nextDouble();
+            }
         System.out.print("Input target pengeluaran utilitas / kos untuk bulan ini (jika tidak ada, isi 0): ");
         util1 = s.nextDouble();
+            while (util1 < 0){
+            System.out.print("Input Anda invalid! Input target pengeluaran utilitas / kos untuk bulan ini (jika tidak ada, isi 0): ");
+            util1 = s.nextDouble();
+            }
         System.out.print("Input jumlah uang yang ingin ditabung: ");
         nb1 = s.nextDouble();
-            if (nb1 == 0){
-            nb1 = -1.0;
+            while (nb1 < 0){
+            System.out.print("Input Anda invalid! Input jumlah uang yang ingin ditabung: ");
+            nb1 = s.nextDouble();
             }
+                //while lebih kecil
         while (masn < mkn1 + trpt1 + util1 + nb1){
             System.out.println("Masukan Anda lebih kecil dari target pengeluaran, tolong input ulang!");
             System.out.print("Input pemasukan uang untuk bulan ini: ");
             masn = s.nextDouble();
+                while (masn <= 0){
+                System.out.print("Input Anda invalid! Input pemasukan uang untuk bulan ini: ");
+                masn = s.nextDouble();
+                }
             System.out.print("Input target pengeluaran uang makan untuk bulan ini (jika tidak ada, tulis 0): ");
             mkn1 = s.nextDouble();
+                while (mkn1 < 0){
+                System.out.print("Input Anda invalid! Input target pengeluaran uang makan untuk bulan ini (jika tidak ada, tulis 0): ");
+                mkn1 = s.nextDouble();
+                }
             System.out.print("Input target pengeluaran uang transportasi untuk bulan ini (jika tidak ada, tulis 0): ");
             trpt1 = s.nextDouble();
+                while (trpt1 < 0){
+                System.out.print("Input Anda invalid! Input target pengeluaran uang transportasi untuk bulan ini (jika tidak ada, tulis 0): ");
+                trpt1 = s.nextDouble();
+                }
             System.out.print("Input target pengeluaran utilitas / kos untuk bulan ini (jika tidak ada, isi 0): ");
             util1 = s.nextDouble();
+                while (util1 < 0){
+                System.out.print("Input Anda invalid! Input target pengeluaran utilitas / kos untuk bulan ini (jika tidak ada, isi 0): ");
+                util1 = s.nextDouble();
+                }
             System.out.print("Input jumlah uang yang ingin ditabung: ");
             nb1 = s.nextDouble();
+                while (nb1 < 0){
+                System.out.print("Input Anda invalid! Input jumlah uang yang ingin ditabung: ");
+                nb1 = s.nextDouble();
+                }
         }
+
     sisatemp = masn - (mkn1 + trpt1 + util1 + nb1);
     System.out.print("Sisa uang untuk pengeluaran lain - lain: Rp. ");
         if (mkn1 == 0){ //if 0 becomes -1.0 to indicate empty on option1
@@ -825,6 +1027,7 @@ continue;
     util.add(util1);
     nabung.add(nb1);
     }
+
 
     private static String nobulan(int nomerbulan) {
     switch (nomerbulan) {
