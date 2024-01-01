@@ -77,10 +77,11 @@ public static void main(String[] args) {
     System.out.println("================================");
     System.out.println("Menu: ");
     System.out.println("1. Tambah entry pengeluaran");
-    System.out.println("2. Cek financial report bulan ini");
-    System.out.println("3. Cek financial report bulan-bulan sebelumnya");
-    System.out.println("4. Pindah bulan");
-    System.out.println("5. Exit");
+    System.out.println("2. Edit tabel / pengeluaran / pemasukan bulan ini");
+    System.out.println("3. Cek financial report bulan ini");
+    System.out.println("4. Cek financial report bulan-bulan sebelumnya");
+    System.out.println("5. Pindah bulan");
+    System.out.println("6. Exit");
     System.out.print("Pilih: ");
     menu = s.nextInt();
 
@@ -100,15 +101,15 @@ public static void main(String[] args) {
         }
     System.out.println("================================");
     System.out.println("");
-        if (sisamktemp > 0){
+        if (sisamktemp >= 0){
         System.out.print("Sisa uang Makan/Minum: Rp. ");
         System.out.printf("%.0f\n", sisamktemp);            
         }
-        if (sisatptemp > 0){
+        if (sisatptemp >= 0){
         System.out.print("Sisa uang Transportasi: Rp. ");
         System.out.printf("%.0f\n", sisatptemp);   
         }        
-        if (sisauttemp > 0){
+        if (sisauttemp >= 0){
         System.out.print("Sisa uang Utilitas: Rp. ");
         System.out.printf("%.0f\n", sisauttemp);   
         }
@@ -128,20 +129,20 @@ public static void main(String[] args) {
     System.out.println("4. Lain - lain (custom)");
     System.out.print("Pilih tipe pengeluaran: ");
     String inputtp= s.next()+s.nextLine();
-    while (!(inputtp.equals("1") || inputtp.equals("2") || inputtp.equals("3") ||  inputtp.equals("4")) || inputtp.equals("1") && sisamktemp == 0 || inputtp.equals("2") && sisatptemp == 0 || inputtp.equals("3") && sisauttemp == 0){
+    while (!(inputtp.equals("1") || inputtp.equals("2") || inputtp.equals("3") ||  inputtp.equals("4")) || inputtp.equals("1") && sisamktemp == -1 || inputtp.equals("2") && sisatptemp == -1 || inputtp.equals("3") && sisauttemp == -1){
         if (!(inputtp.equals("1") || inputtp.equals("2") || inputtp.equals("3") ||  inputtp.equals("4"))){
         System.out.print("Tipe pengeluaran invalid! Pilih tipe pengeluaran: ");
         inputtp= s.next()+s.nextLine();
         }
-        else if (inputtp.equals("1") && sisamktemp == 0){
+        else if (inputtp.equals("1") && sisamktemp == -1){
         System.out.print("Anda tidak memiliki pengeluaran makanan/minuman! Pilih tipe pengeluaran: ");
         inputtp= s.next()+s.nextLine();        
         }
-        else if (inputtp.equals("2") && sisatptemp == 0){
+        else if (inputtp.equals("2") && sisatptemp == -1){
         System.out.print("Anda tidak memiliki pengeluaran transportasi! Pilih tipe pengeluaran: ");
         inputtp= s.next()+s.nextLine();        
         }
-        else if (inputtp.equals("3") && sisauttemp == 0){
+        else if (inputtp.equals("3") && sisauttemp == -1){
         System.out.print("Anda tidak memiliki pengeluaran utilitas! Pilih tipe pengeluaran: ");
         inputtp= s.next()+s.nextLine();        
         }
@@ -167,6 +168,10 @@ public static void main(String[] args) {
         System.out.println("Uang Makan/Minum Anda tidak mencukupi!");
         System.out.print("Apakah Anda mau mengambil uang dari tabungan? (Y/N): ");
         String yesno1 = s.next()+s.nextLine();
+            while (!yesno1.equalsIgnoreCase("y") && !yesno1.equalsIgnoreCase("n")){
+            System.out.print("Input hanya bisa Y/N! Apakah Anda mau mengambil uang dari tabungan?: ");
+            yesno1 = s.next()+s.nextLine();
+            }
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke uang Makan/Minum: ");
             Double fromtabung = s.nextDouble();
@@ -188,6 +193,10 @@ public static void main(String[] args) {
         System.out.println("Uang Transportasi Anda tidak mencukupi!");
         System.out.print("Apakah Anda mau mengambil uang dari tabungan? (Y/N): ");
         String yesno1 = s.next()+s.nextLine();
+            while (!yesno1.equalsIgnoreCase("y") && !yesno1.equalsIgnoreCase("n")){
+            System.out.print("Input hanya bisa Y/N! Apakah Anda mau mengambil uang dari tabungan?: ");
+            yesno1 = s.next()+s.nextLine();
+            }
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke uang Transportasi: ");
             Double fromtabung = s.nextDouble();
@@ -209,6 +218,10 @@ public static void main(String[] args) {
         System.out.println("Uang Utilitas Anda tidak mencukupi!");
         System.out.print("Apakah Anda mau mengambil uang dari tabungan? (Y/N): ");
         String yesno1 = s.next()+s.nextLine();
+            while (!yesno1.equalsIgnoreCase("y") && !yesno1.equalsIgnoreCase("n")){
+            System.out.print("Input hanya bisa Y/N! Apakah Anda mau mengambil uang dari tabungan?: ");
+            yesno1 = s.next()+s.nextLine();
+            }
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke uang Utilitas: ");
             Double fromtabung = s.nextDouble();
@@ -230,6 +243,10 @@ public static void main(String[] args) {
         System.out.println("Sisa uang Anda tidak mencukupi!");
         System.out.print("Apakah Anda mau mengambil uang dari tabungan? (Y/N): ");
         String yesno1 = s.next()+s.nextLine();
+            while (!yesno1.equalsIgnoreCase("y") && !yesno1.equalsIgnoreCase("n")){
+            System.out.print("Input hanya bisa Y/N! Apakah Anda mau mengambil uang dari tabungan?: ");
+            yesno1 = s.next()+s.nextLine();
+            }
             if (yesno1.equalsIgnoreCase("y")){
             System.out.print("Input jumlah uang yang ditransfer dari tabungan ke pengeluaran lain - lain: ");
             Double fromtabung = s.nextDouble();
@@ -300,15 +317,15 @@ public static void main(String[] args) {
         }
     }
     System.out.println("");
-        if (sisamktemp > 0){
+        if (sisamktemp >= 0){
         System.out.print("Sisa uang Makan/Minum: Rp. ");
         System.out.printf("%.0f\n", sisamktemp);            
         }
-        if (sisatptemp > 0){
+        if (sisatptemp >= 0){
         System.out.print("Sisa uang Transportasi: Rp. ");
         System.out.printf("%.0f\n", sisatptemp);   
-        }        
-        if (sisauttemp > 0){
+        }
+        if (sisauttemp >= 0){
         System.out.print("Sisa uang Utilitas: Rp. ");
         System.out.printf("%.0f\n", sisauttemp);   
         }
@@ -318,9 +335,152 @@ public static void main(String[] args) {
     }
 
     else if (menu == 2){
+        if (pertamangisibulan == 0){
+        System.out.println("Buat tabel baru terlebih dahulu!");
+        System.out.println("");
+        continue;
+        }
+    System.out.println("================================");
+    System.out.println("1. Edit tabel/pengeluaran");
+    System.out.println("2. Edit pemasukan dan tabungan");
+    System.out.print("Pilih: ");
+    int input2  = s.nextInt();
+        if (input2 == 1){
+        
+        }
+        else if (input2 == 2){
+        System.out.println("");
+        if (sisamktemp >= 0){
+        System.out.print("Sisa uang Makan/Minum: Rp. ");
+        System.out.printf("%.0f\n", sisamktemp);            
+        }
+        if (sisatptemp >= 0){
+        System.out.print("Sisa uang Transportasi: Rp. ");
+        System.out.printf("%.0f\n", sisatptemp);   
+        }        
+        if (sisauttemp >= 0){
+        System.out.print("Sisa uang Utilitas: Rp. ");
+        System.out.printf("%.0f\n", sisauttemp);   
+        }
+        System.out.print("Sisa uang untuk kebutuhan lain-lain: Rp. ");
+        System.out.printf("%.0f\n", sisalltemp);
+
+        System.out.println("Kategori: ");
+        System.out.println("1. Makanan/Minuman\n2. Transportasi\n3. Utilitas\n4. Lain - lain\n5. Tabungan");
+        System.out.print("Dana ditarik dari kategori: ");
+        int inputambil = s.nextInt();
+        System.out.print("Dana ditransfer ke kategori: ");
+        int inputtransfer = s.nextInt();
+            while (inputambil == inputtransfer){
+            System.out.println("Kategori ditarik dan ditransfer tidak bisa sama!");
+            System.out.print("Dana ditarik dari kategori: ");
+            inputambil = s.nextInt();
+            System.out.print("Dana ditransfer ke kategori: ");
+            inputtransfer = s.nextInt();
+            }
+        
+        System.out.print("Input jumlah yang ditarik: ");
+        Double ambiltemp = s.nextDouble();
+            if (inputambil == 1){ // Uang diambil dari: 
+               if (sisamktemp < ambiltemp){
+                System.out.println("Uang Makan/Minum Anda tidak cukup!");
+                continue;
+               }
+                else {
+                sisamktemp = sisamktemp - ambiltemp;
+               }
+            }
+            else if (inputambil == 2){
+               if (sisatptemp < ambiltemp){
+                System.out.println("Uang Transportasi Anda tidak cukup!");
+                continue;
+               }
+                else {
+                sisatptemp = sisatptemp - ambiltemp;
+               }         
+            }
+            else if (inputambil == 3){
+               if (sisauttemp < ambiltemp){
+                System.out.println("Uang Utilitas Anda tidak cukup!");
+                continue;
+               }
+                else {
+                sisauttemp = sisauttemp - ambiltemp;
+               }                
+            }
+            else if (inputambil == 4){
+               if (sisalltemp < ambiltemp){
+                System.out.println("Uang pengeluaran lain - lain Anda tidak cukup!");
+                continue;
+               }
+                else {
+                sisalltemp = sisalltemp - ambiltemp;
+               }                
+            }
+            else if (inputambil == 5){
+               if (totaltabung < ambiltemp){
+                System.out.println("Tabungan Anda tidak cukup!");
+                continue;
+               }
+                else {
+                totaltabung = totaltabung - ambiltemp;
+               }   
+            }
+            
+            if (inputtransfer == 1){ //dana transfer ke:
+                if (sisamktemp < 0){
+                sisamktemp = 0.0;
+                } 
+            sisamktemp = sisamktemp + ambiltemp;            
+            }
+            else if (inputtransfer == 2){
+                if (sisatptemp < 0){
+                sisatptemp = 0.0;
+                } 
+            sisatptemp = sisatptemp + ambiltemp;
+            }
+            else if (inputtransfer == 3){
+                if (sisauttemp < 0){
+                sisauttemp = 0.0;
+                } 
+            sisauttemp = sisauttemp + ambiltemp;
+            }
+            else if (inputtransfer == 4){
+                if (sisalltemp < 0){
+                sisalltemp = 0.0;
+                } 
+            sisalltemp = sisalltemp + ambiltemp;                
+            }
+            else if (inputtransfer == 5){
+            totaltabung = totaltabung + ambiltemp;                
+            }
+        
+        System.out.println("");
+        System.out.println("Pengeluaran yang baru: ");
+        if (sisamktemp >= 0){
+        System.out.print("Sisa uang Makan/Minum: Rp. ");
+        System.out.printf("%.0f\n", sisamktemp);            
+        }
+        if (sisatptemp >= 0){
+        System.out.print("Sisa uang Transportasi: Rp. ");
+        System.out.printf("%.0f\n", sisatptemp);   
+        }        
+        if (sisauttemp >= 0){
+        System.out.print("Sisa uang Utilitas: Rp. ");
+        System.out.printf("%.0f\n", sisauttemp);   
+        }
+        System.out.print("Sisa uang untuk kebutuhan lain-lain: Rp. ");
+        System.out.printf("%.0f\n", sisalltemp);
+
+        }
+    System.out.println("\n");
+    }
+
+    else if (menu == 3){
     String bulan = nobulan(bulancounter);
         if (pertamangisibulan == 0){
         System.out.println("Buat tabel baru terlebih dahulu!");
+        System.out.println("");
         continue;
         }
     System.out.println(""); //print table starts here
@@ -370,27 +530,26 @@ public static void main(String[] args) {
         }
     }
     System.out.println("");
-        if (sisamktemp > 0){
+        if (sisamktemp >= 0){
         System.out.print("Sisa uang Makan/Minum: Rp. ");
         System.out.printf("%.0f\n", sisamktemp);            
         }
-        if (sisatptemp > 0){
+        if (sisatptemp >= 0){
         System.out.print("Sisa uang Transportasi: Rp. ");
         System.out.printf("%.0f\n", sisatptemp);   
         }        
-        if (sisauttemp > 0){
+        if (sisauttemp >= 0){
         System.out.print("Sisa uang Utilitas: Rp. ");
         System.out.printf("%.0f\n", sisauttemp);   
         }
     System.out.print("Sisa uang untuk kebutuhan lain-lain: Rp. ");
     System.out.printf("%.0f\n", sisalltemp);       
-    System.out.print("Total tabungan: ");
+    System.out.print("Total tabungan : Rp. ");
     System.out.printf("%.2f\n", totaltabung);
-    System.out.println("Edit tabel? (Y/N): ");
     System.out.println("");
     }
 
-    else if (menu == 3){
+    else if (menu == 4){
         if (bulancounter == 1){
         System.out.println("Ini adalah bulan pertama inputan Anda!");
         }
@@ -457,16 +616,16 @@ public static void main(String[] args) {
         System.out.print("Sisa uang Makan/Minum: Rp. ");
         System.out.printf("%.0f\n", sisamk[inputbln3-1]);
         }
-        else if (sisatp[inputbln3-1] > 0){
-        System.out.print("Sisa uang Transportasi: ");
+        if (sisatp[inputbln3-1] > 0){
+        System.out.print("Sisa uang Transportasi: Rp. ");
         System.out.printf("%.0f\n", sisatp[inputbln3-1]);
         }
-        else if (sisaut[inputbln3-1] > 0){
-        System.out.print("Sisa uang Utilitas: ");
+        if (sisaut[inputbln3-1] > 0){
+        System.out.print("Sisa uang Utilitas: Rp. ");
         System.out.printf("%.0f\n", sisaut[inputbln3-1]);
         }
         Double tbs  = sisamk[inputbln3-1] + sisatp[inputbln3-1] + sisaut[inputbln3-1] + sisall[inputbln3-1];
-        System.out.print("Uang yang ditabung: ");
+        System.out.print("Uang yang ditabung: Rp. ");
         System.out.printf("%.2f\n", tbs);
         } 
         else {
@@ -476,7 +635,7 @@ public static void main(String[] args) {
     System.out.println("");
     }
 
-    else if (menu == 4){ //ganti bulan
+    else if (menu == 5){ //ganti bulan
                 {//clone temp to arraylist bulan
                 if (bulancounter == 1){
                 npjan = (ArrayList)nptemp.clone();
@@ -594,9 +753,10 @@ public static void main(String[] args) {
     System.out.println("");
     }
 
-    else if (menu == 5){
+    else if (menu == 6){
     System.exit(0);
     }
+
     else {
     System.out.println("Invalid input, coba lagi!");
     continue;
@@ -604,8 +764,8 @@ public static void main(String[] args) {
 
 //break;
 } catch (Exception e){
-System.out.println("Input error, shutting down!");
-break;
+System.out.println("Input error, try again!");
+continue;
 }
 
 } // bulancounter
@@ -625,6 +785,9 @@ break;
         util1 = s.nextDouble();
         System.out.print("Input jumlah uang yang ingin ditabung: ");
         nb1 = s.nextDouble();
+            if (nb1 == 0){
+            nb1 = -1.0;
+            }
         while (masn < mkn1 + trpt1 + util1 + nb1){
             System.out.println("Masukan Anda lebih kecil dari target pengeluaran, tolong input ulang!");
             System.out.print("Input pemasukan uang untuk bulan ini: ");
@@ -640,6 +803,15 @@ break;
         }
     sisatemp = masn - (mkn1 + trpt1 + util1 + nb1);
     System.out.print("Sisa uang untuk pengeluaran lain - lain: Rp. ");
+        if (mkn1 == 0){ //if 0 becomes -1.0 to indicate empty on option1
+        mkn1 = -1.0;
+        }
+        if (trpt1 == 0){
+        trpt1 = -1.0;
+        }
+        if (util1 == 0){
+        util1 = -1.0;
+        }
             if (sisatemp % 1 == 0){
             System.out.printf("%.0f\n", sisatemp);            
             }
