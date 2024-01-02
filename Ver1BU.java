@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Ver1 {
+public class Ver1temp3 {
 // kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
     private static ArrayList<Double> mkn = new ArrayList<Double>();
@@ -58,12 +58,17 @@ public static void main(String[] args) {
     Double[] sisatp = new Double[12]; //transportasi
     Double[] sisaut = new Double[12]; //utilitas
     Double[] tabungperbulan = new Double[12];
+    Double[] keluarperbulan = new Double[12];
+    Double totalkeluarmk = 0.0;
+    Double totalkeluartp = 0.0;
+    Double totalkeluarut = 0.0;
+    Double totalkeluarll = 0.0;
     Double totaltabung = 0.0;
     Double sisalltemp = 0.0;
     Double sisamktemp = 0.0;
     Double sisatptemp = 0.0;
     Double sisauttemp = 0.0;
-    Double tttemp = 0.0;    
+    Double tttemp = 0.0;   
     int menu;
     int bulancounter = 1;
     int bulan4arrlist = 12;
@@ -72,8 +77,108 @@ public static void main(String[] args) {
     System.out.println("================================");
     System.out.println("Selamat datang di StudentFinCalc");
 
-    while (bulancounter < 13){
+    while (bulancounter <= 13){
     try{
+        if (bulancounter == 13){ // financial report
+        System.out.println("=================================================");
+           // String bulan = nobulan(bulancounter);
+        String bulannb = "placeholder";
+        String bulanns = "placeholder";
+        String bulankb = "placeholder";
+        String bulanks = "placeholder";
+        Double nabungbiggest = tabungperbulan[0];
+        Double nabungsmallest = tabungperbulan[0];
+        Double keluarbiggest = keluarperbulan[0];
+        Double keluarsmallest = keluarperbulan[0];        
+            for (int a = 1; a < tabungperbulan.length; a++){ 
+                if (tabungperbulan[a] > nabungbiggest){ //biggest tabung
+                nabungbiggest = tabungperbulan[a];
+                bulannb = nobulan(a);
+                }
+                if (tabungperbulan[a] < nabungsmallest){ //smallest tabung
+                nabungsmallest = tabungperbulan[a];
+                bulanns = nobulan(a);
+                }
+                if (keluarperbulan[a] > keluarbiggest){ //biggest keluar
+                keluarbiggest = keluarperbulan[a];
+                bulankb = nobulan(a);
+                }
+                if (keluarperbulan[a] > keluarsmallest){ //biggest keluar
+                keluarsmallest = keluarperbulan[a];
+                bulanks = nobulan(a);
+                }
+            }
+    System.out.println("========= Financial Report Akhir Tahun ==========");
+       System.out.println("\tBulan\t\t\t\t\tPengeluaran\t\t\t\t\tTabungan");
+            for (int a = 0; a < 12; a++){
+            String bulan = nobulan(a);
+            System.out.print("\t");
+            if (bulan.length() >= 8 && bulan.length() < 16){
+                System.out.print(bulan+"\t\t\t\t\t");
+                }
+                else if (bulan.length() >= 16 && bulan.length() <= 20){
+                System.out.print(bulan+"\t\t\t\t");        
+                }
+                else if (bulan.length() < 8){
+                System.out.print(bulan+"\t\t\t\t\t\t"); //less then 8
+                }
+            System.out.print("Rp. ");
+            if (keluarperbulan.toString().length() >= 4 && keluarperbulan.toString().length() < 12){
+                System.out.printf("%.0f", keluarperbulan[a]);
+                System.out.print("\t\t\t\t\t");
+                }
+                else if (keluarperbulan.toString().length() >= 12 && keluarperbulan.toString().length() <= 16){
+                System.out.printf("%.0f", keluarperbulan[a]);
+                System.out.print("\t\t\t\t");        
+                }
+                else if (keluarperbulan.toString().length() < 4){
+                System.out.printf("%.0f", keluarperbulan[a]);
+                System.out.print("\t\t\t\t\t\t"); //less then 8
+                }
+            System.out.print("Rp. ");
+            if (tabungperbulan.toString().length() >= 4 && tabungperbulan.toString().length() < 12){
+                System.out.printf("%.0f", tabungperbulan[a]);
+                System.out.print("\t\t\t\t\t");
+                }
+                else if (tabungperbulan.toString().length() >= 12 && tabungperbulan.toString().length() <= 16){
+                System.out.print("\t\t\t\t");        
+                }
+                else if (tabungperbulan.toString().length() < 4){
+                System.out.print("\t\t\t\t\t\t"); //less then 8
+                }
+            System.out.println("");
+            }
+        System.out.println("");
+        System.out.println("Bulan di mana Anda menghabiskan uang paling sedikit adalah "+bulanks+" sebanyak: Rp. ");
+        System.out.printf("%.2f\n", keluarsmallest);        
+        System.out.println("Bulan di mana Anda menghabiskan uang paling banyak adalah "+bulankb+" sebanyak: Rp. ");
+        System.out.printf("%.2f\n", keluarbiggest);
+        System.out.print("Bulan di mana Anda menabung paling sedikit adalah "+bulanns+" sebanyak: Rp. ");
+        System.out.printf("%.2f\n", nabungsmallest);        
+        System.out.println("Bulan di mana Anda menabung paling banyak adalah: "+bulannb+" sebanyak: Rp. ");
+        System.out.printf("%.2f\n", nabungbiggest);
+        if (totalkeluarmk > 0){
+        System.out.println("Total pengeluaran makan/minum Anda tahun ini adalah: Rp. ");
+        System.out.printf("%.2f\n", (totalkeluarmk));
+        }
+        if (totalkeluartp > 0) {
+        System.out.println("Total pengeluaran transportasi Anda tahun ini adalah: Rp. ");
+        System.out.printf("%.2f\n", (totalkeluartp));
+        }
+        if (totalkeluarut > 0) {
+        System.out.println("Total pengeluaran utilitas Anda tahun ini adalah: Rp. ");
+        System.out.printf("%.2f\n", (totalkeluarut));
+        }                        
+        System.out.println("Total pengeluaran lain - lain Anda tahun ini adalah: Rp. ");
+        System.out.printf("%.2f\n", (totalkeluarll));
+        System.out.println("Total pengeluaran Anda tahun ini adalah: Rp. ");
+        System.out.printf("%.2f\n", (totalkeluarll+totalkeluarmk+totalkeluartp+totalkeluarut));                
+        System.out.print("Total tabungan Anda tahun ini adalah: Rp. ");
+        System.out.printf("%.2f\n", totaltabung);
+        System.out.println("");
+        System.out.println("See you next time!");
+        System.exit(0);
+        }
     System.out.println("================================");
     String bulan = nobulan(bulancounter);
     System.out.println("Bulan sekarang: "+bulan);    
@@ -82,7 +187,12 @@ public static void main(String[] args) {
     System.out.println("2. Edit tabel / pengeluaran / pemasukan bulan ini");
     System.out.println("3. Cek financial report bulan ini");
     System.out.println("4. Cek financial report bulan-bulan sebelumnya");
-    System.out.println("5. Pindah bulan");
+        if (bulancounter != 12){
+        System.out.println("5. Pindah bulan");
+        }
+        else if (bulancounter == 12){
+        System.out.println("5. Akhiri tahun dan print financial report");
+        }
     System.out.println("6. Exit");
     System.out.print("Pilih: ");
     menu = s.nextInt();
@@ -96,7 +206,7 @@ public static void main(String[] args) {
         sisatptemp = trpt.get(bulancounter-1);
         sisauttemp = util.get(bulancounter-1);
         tttemp = nabung.get(bulancounter-1);
-        totaltabung = totaltabung + tttemp;
+        totaltabung = totaltabung + tttemp; //adds tabungan this month to total tabungan
         pertamangisibulan = 1;
         }
     System.out.println("================================");
@@ -773,7 +883,7 @@ public static void main(String[] args) {
         System.out.print("Sisa uang Utilitas: Rp. ");
         System.out.printf("%.0f\n", sisaut[inputbln3-1]);
         }
-        Double tbs  = sisamk[inputbln3-1] + sisatp[inputbln3-1] + sisaut[inputbln3-1] + sisall[inputbln3-1];
+        Double tbs  = tabungperbulan[inputbln3-1];
         System.out.print("Uang yang ditabung: Rp. ");
         System.out.printf("%.2f\n", tbs);
         } 
@@ -894,11 +1004,17 @@ public static void main(String[] args) {
     nptemp.clear(); //clean slate for next month
     tptemp.clear();
     hptemp.clear();
-    totaltabung = totaltabung + sisalltemp + sisamktemp + sisatptemp + tttemp; //sisa gets added to tabungan
     sisall[bulancounter-1] = sisalltemp; //sisa perbulan gets recorded
     sisamk[bulancounter-1] = sisamktemp;
     sisatp[bulancounter-1] = sisatptemp;
     sisaut[bulancounter-1] = sisauttemp;
+    totalkeluarmk = totalkeluarmk + (mkn.get(bulancounter-1) - sisamktemp);
+    totalkeluartp = totalkeluartp + (trpt.get(bulancounter-1) - sisatptemp);
+    totalkeluarut = totalkeluarut + (util.get(bulancounter-1) - sisauttemp);
+    totalkeluarll = totalkeluarll + (lainlain.get(bulancounter-1) - sisalltemp);       
+    tabungperbulan[bulancounter - 1] = tttemp + sisalltemp + sisamktemp + sisatptemp + sisauttemp; //recording tabungan 
+    keluarperbulan[bulancounter - 1] = masukan.get(bulancounter - 1) - tabungperbulan[bulancounter - 1];
+    totaltabung = totaltabung + sisalltemp + sisamktemp + sisatptemp + sisauttemp; //sisa gets added to tabungan
     bulancounter++; //next month
     nextmonth++; //next time input transferred is for next month
     sisalltemp = 0.0; //reinitialize sisa per month
