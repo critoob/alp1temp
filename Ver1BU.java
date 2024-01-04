@@ -7,7 +7,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 public class VerFinal {
-// kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
     private static ArrayList<Double> mkn = new ArrayList<Double>();
     private static ArrayList<Double> trpt = new ArrayList<Double>();
