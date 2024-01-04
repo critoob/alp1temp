@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-public class Ver1temp3 {
+public class VerFinal {
 // kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
     private static ArrayList<Double> mkn = new ArrayList<Double>();
@@ -82,7 +82,7 @@ public class Ver1temp3 {
 
 
 public static void main(String[] args) {
-    loadData();
+    datamasuk();
     Scanner s = new Scanner(System.in);
     int menu; // input nomer menu
     System.out.println("================================");
@@ -119,70 +119,72 @@ public static void main(String[] args) {
                 bulanks = nobulan(a);
                 }
             }
-    System.out.println("========= Financial Report Akhir Tahun ==========");
+    System.out.println("\t\t\t========= Financial Report Akhir Tahun ==========");
+    System.out.println("");
        System.out.println("\tBulan\t\t\t\t\tPengeluaran\t\t\t\t\tTabungan");
             for (int a = 0; a < 12; a++){
-            String bulan = nobulan(a);
+            String bulan = nobulan(a+1);
             System.out.print("\t");
             if (bulan.length() >= 8 && bulan.length() < 16){
-                System.out.print(bulan+"\t\t\t\t\t");
+                System.out.print(bulan+"\t\t\t\t");
                 }
                 else if (bulan.length() >= 16 && bulan.length() <= 20){
-                System.out.print(bulan+"\t\t\t\t");        
+                System.out.print(bulan+"\t\t\t");        
                 }
                 else if (bulan.length() < 8){
-                System.out.print(bulan+"\t\t\t\t\t\t"); //less then 8
+                System.out.print(bulan+"\t\t\t\t\t"); //less then 8
                 }
             System.out.print("Rp. ");
-            if (keluarperbulan.toString().length() >= 4 && keluarperbulan.toString().length() < 12){
+            String kpbString = keluarperbulan[a].toString();
+            String tpbString = tabungperbulan[a].toString();
+            if (kpbString.length() >= 4 && kpbString.toString().length() < 12){
+                System.out.printf("%.0f", keluarperbulan[a]);
+                System.out.print("\t\t\t\t\t\t");
+                }
+                else if (kpbString.toString().length() >= 12 && kpbString.toString().length() <= 16){
                 System.out.printf("%.0f", keluarperbulan[a]);
                 System.out.print("\t\t\t\t\t");
                 }
-                else if (keluarperbulan.toString().length() >= 12 && keluarperbulan.toString().length() <= 16){
+                else if (kpbString.toString().length() < 4){
                 System.out.printf("%.0f", keluarperbulan[a]);
-                System.out.print("\t\t\t\t");        
-                }
-                else if (keluarperbulan.toString().length() < 4){
-                System.out.printf("%.0f", keluarperbulan[a]);
-                System.out.print("\t\t\t\t\t\t"); //less then 8
+                System.out.print("\t\t\t\t\t\t\t"); //less then 8
                 }
             System.out.print("Rp. ");
-            if (tabungperbulan.toString().length() >= 4 && tabungperbulan.toString().length() < 12){
+            if (tpbString.length() >= 4 && tpbString.length() < 12){
                 System.out.printf("%.0f", tabungperbulan[a]);
-                System.out.print("\t\t\t\t\t");
                 }
-                else if (tabungperbulan.toString().length() >= 12 && tabungperbulan.toString().length() <= 16){
-                System.out.print("\t\t\t\t");        
+                else if (tpbString.length() >= 12 && tpbString.length() <= 16){
+                System.out.printf("%.0f", tabungperbulan[a]);
                 }
-                else if (tabungperbulan.toString().length() < 4){
-                System.out.print("\t\t\t\t\t\t"); //less then 8
+                else if (tpbString.length() < 4){
+                System.out.printf("%.0f", tabungperbulan[a]);
                 }
             System.out.println("");
             }
         System.out.println("");
-        System.out.println("Bulan di mana Anda menghabiskan uang paling sedikit adalah "+bulanks+" sebanyak: Rp. ");
+        System.out.print("Bulan di mana Anda menghabiskan uang paling sedikit adalah "+bulanks+" sebanyak: Rp. ");
         System.out.printf("%.2f\n", keluarsmallest);        
-        System.out.println("Bulan di mana Anda menghabiskan uang paling banyak adalah "+bulankb+" sebanyak: Rp. ");
+        System.out.print("Bulan di mana Anda menghabiskan uang paling banyak adalah "+bulankb+" sebanyak: Rp. ");
         System.out.printf("%.2f\n", keluarbiggest);
         System.out.print("Bulan di mana Anda menabung paling sedikit adalah "+bulanns+" sebanyak: Rp. ");
         System.out.printf("%.2f\n", nabungsmallest);        
-        System.out.println("Bulan di mana Anda menabung paling banyak adalah: "+bulannb+" sebanyak: Rp. ");
+        System.out.print("Bulan di mana Anda menabung paling banyak adalah: "+bulannb+" sebanyak: Rp. ");
         System.out.printf("%.2f\n", nabungbiggest);
         if (totalkeluarmk > 0){
-        System.out.println("Total pengeluaran makan/minum Anda tahun ini adalah: Rp. ");
+        System.out.print("Total pengeluaran makan/minum Anda tahun ini adalah: Rp. ");
         System.out.printf("%.2f\n", (totalkeluarmk));
         }
         if (totalkeluartp > 0) {
-        System.out.println("Total pengeluaran transportasi Anda tahun ini adalah: Rp. ");
+        System.out.print("Total pengeluaran transportasi Anda tahun ini adalah: Rp. ");
         System.out.printf("%.2f\n", (totalkeluartp));
         }
         if (totalkeluarut > 0) {
-        System.out.println("Total pengeluaran utilitas Anda tahun ini adalah: Rp. ");
+        System.out.print("Total pengeluaran utilitas Anda tahun ini adalah: Rp. ");
         System.out.printf("%.2f\n", (totalkeluarut));
         }                        
-        System.out.println("Total pengeluaran lain - lain Anda tahun ini adalah: Rp. ");
+        System.out.print("Total pengeluaran lain - lain Anda tahun ini adalah: Rp. ");
         System.out.printf("%.2f\n", (totalkeluarll));
-        System.out.println("Total pengeluaran Anda tahun ini adalah: Rp. ");
+        System.out.print("Total pengeluaran Anda tahun ini adalah: Rp. ");
         System.out.printf("%.2f\n", (totalkeluarll+totalkeluarmk+totalkeluartp+totalkeluarut));                
         System.out.print("Total tabungan Anda tahun ini adalah: Rp. ");
         System.out.printf("%.2f\n", totaltabung);
@@ -564,7 +566,14 @@ public static void main(String[] args) {
         int pilihbaris = s.nextInt();
         if (pilihbaris >= 1 && pilihbaris <= nptemp.size()) {
             System.out.println("Baris "+pilihbaris+": "); //display that specific row
-            System.out.print(nptemp.get(pilihbaris-1)+"\t\t"+tptemp.get(pilihbaris-1)+"\t\t");
+            System.out.print("\t"+nptemp.get(pilihbaris-1)+"\t\t"+tptemp.get(pilihbaris-1)+"\t\t");
+            if (tptemp.get(pilihbaris-1).equals("1") ||  tptemp.get(pilihbaris-1).equals("2") || tptemp.get(pilihbaris-1).equals("3")){
+            String tipe = buattipe(tptemp.get(pilihbaris-1));
+            System.out.print(tipe+"\t\t");
+            }
+            else{
+                System.out.print(tptemp.get(pilihbaris-1)+"\t\t");
+            }
                 if (hptemp.get(pilihbaris-1) % 1 == 0){
                 System.out.printf("%.0f\n", hptemp.get(pilihbaris-1));            
                 }
@@ -585,7 +594,6 @@ public static void main(String[] args) {
             String inputbaris = s.next()+s.nextLine();
             nptemp.set(pilihbaris-1, inputbaris);
             }
-
             else if (partedit == 2){
             System.out.println("Tipe pengeluaran\n1. Makan/Minum\n2. Transportasi\n3. Utilitas\n4. Lain - lain (custom)");
             System.out.print("Pilih tipe pengeluaran baru: ");
@@ -608,6 +616,7 @@ public static void main(String[] args) {
             System.out.print("Input invalid! Input jumlah pengeluaran baru: ");
             inputbaris = s.nextDouble();
             }
+            hptemp.set(pilihbaris-1, inputbaris);
             }
         System.out.println("Perubahan berhasil!");
         } else {
@@ -883,18 +892,29 @@ public static void main(String[] args) {
             }
         System.out.println("");
         if (sisamk[inputbln3-1] > 0){
+        Double keluarmk = mkn.get(inputbln3-1) - sisamk[inputbln3-1];
+        System.out.print("Pengeluaran Makan/Minum: Rp. ");
+        System.out.printf("%.0f\n", keluarmk);        
         System.out.print("Sisa uang Makan/Minum: Rp. ");
         System.out.printf("%.0f\n", sisamk[inputbln3-1]);
         }
         if (sisatp[inputbln3-1] > 0){
+        Double keluartp = trpt.get(inputbln3-1) - sisatp[inputbln3-1];
+        System.out.print("Pengeluaran Transportasi: Rp. ");
+        System.out.printf("%.0f\n", keluartp); 
         System.out.print("Sisa uang Transportasi: Rp. ");
         System.out.printf("%.0f\n", sisatp[inputbln3-1]);
         }
         if (sisaut[inputbln3-1] > 0){
+        Double keluarut = util.get(inputbln3-1) - sisaut[inputbln3-1];
+        System.out.print("Pengeluaran Utilitas: Rp. ");
+        System.out.printf("%.0f\n", keluarut);     
         System.out.print("Sisa uang Utilitas: Rp. ");
         System.out.printf("%.0f\n", sisaut[inputbln3-1]);
         }
         Double tbs  = tabungperbulan[inputbln3-1];
+        System.out.print("Total pengeluaran: ");
+        System.out.printf("%.2f\n", (masukan.get(inputbln3-1) - tbs));
         System.out.print("Uang yang ditabung: Rp. ");
         System.out.printf("%.2f\n", tbs);
         } 
@@ -1043,13 +1063,13 @@ public static void main(String[] args) {
     }
 
     else if (menu == 6){
-    saveData();
+    save();
     System.exit(0);
     }
 
-    else if (menu == 7){
-    resetData();
-    saveData();
+    else if (menu == 69420){
+    reset();
+    save();
     System.exit(0);
     }
 
@@ -1057,8 +1077,7 @@ public static void main(String[] args) {
     System.out.println("Invalid input, coba lagi!");
     continue;
     }
-
-break;
+    save();
 } catch (Exception e){
 System.out.println("Input error, try again!");
 continue;
@@ -1176,7 +1195,7 @@ public static void inputawalbulan(){
         case 10: return "October";
         case 11: return "November";
         case 12: return "Desember";
-        default: return null;  // Return null for invalid input
+        default: return null;
         }
     }
 
@@ -1185,11 +1204,11 @@ public static void inputawalbulan(){
             case "1": return "Makan/Minum";
             case "2": return "Transportasi";
             case "3": return "Utilitas";
-            default: return null;  // Return null for invalid input
+            default: return null; 
         }
     }
 
-    private static void saveData() {
+    private static void save() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("budget_data.dat"))) {
             oos.writeObject(masukan); // Serialize and save ArrayList
             oos.writeObject(mkn);
@@ -1264,16 +1283,13 @@ public static void inputawalbulan(){
             oos.writeInt(bulancounter);
             oos.writeInt(pertamangisibulan);
     
-            // Save other relevant data
-            System.out.println("Data saved successfully!");
         } catch (IOException e) {
             System.out.println("Error saving data: " + e.getMessage());
         }
     }
 
-    private static void loadData() {
+    private static void datamasuk() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("budget_data.dat"))) {
-            // Deserialize and load ArrayList
             masukan = (ArrayList<Double>) ois.readObject();
             mkn = (ArrayList<Double>) ois.readObject();
             trpt = (ArrayList<Double>) ois.readObject();
@@ -1281,7 +1297,6 @@ public static void inputawalbulan(){
             nabung = (ArrayList<Double>) ois.readObject();
             lainlain = (ArrayList<Double>) ois.readObject();
     
-            // Deserialize and load ArrayList of ArrayList<String>
             namap = (ArrayList<ArrayList<String>>) ois.readObject();
             npjan = (ArrayList<String>) ois.readObject();
             npfeb = (ArrayList<String>) ois.readObject();
@@ -1297,7 +1312,6 @@ public static void inputawalbulan(){
             npdec = (ArrayList<String>) ois.readObject();
             nptemp = (ArrayList<String>) ois.readObject();
     
-            // Deserialize and load ArrayList of ArrayList<String>
             tipep = (ArrayList<ArrayList<String>>) ois.readObject();
             tpjan = (ArrayList<String>) ois.readObject();
             tpfeb = (ArrayList<String>) ois.readObject();
@@ -1313,7 +1327,6 @@ public static void inputawalbulan(){
             tpdec = (ArrayList<String>) ois.readObject();
             tptemp = (ArrayList<String>) ois.readObject();
     
-            // Deserialize and load ArrayList of ArrayList<Double>
             hartotp = (ArrayList<ArrayList<Double>>) ois.readObject();
             hpjan = (ArrayList<Double>) ois.readObject();
             hpfeb = (ArrayList<Double>) ois.readObject();
@@ -1337,8 +1350,6 @@ public static void inputawalbulan(){
             } else if (obj instanceof Double[]) {
                 sisall = (Double[]) obj;
             } else {
-                // Handle the case where the object has an unexpected type.
-                // You might want to log an error or throw an exception.
                 throw new RuntimeException("Unexpected object type during deserialization");
             }
 
@@ -1389,11 +1400,9 @@ public static void inputawalbulan(){
         keluarperbulan = listKeluarperbulan.toArray(new Double[12]);
         } else if (objKeluarperbulan instanceof Double[]) {
         keluarperbulan = (Double[]) objKeluarperbulan;
-       } else {
+        } else {
         throw new RuntimeException("Unexpected object type during deserialization for keluarperbulan");
         }
-    
-            // Load doubles and integers
             totalkeluarmk = ois.readDouble();
             totalkeluartp = ois.readDouble();
             totalkeluarut = ois.readDouble();
@@ -1408,14 +1417,12 @@ public static void inputawalbulan(){
             bulancounter = ois.readInt();
             pertamangisibulan = ois.readInt();
     
-            // Load other relevant data
-            System.out.println("Data loaded successfully!");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error loading data: " + e.getMessage());
         }
     }
 
-    private static void resetData() {
+    private static void reset() {
     masukan.clear();
     mkn.clear();
     trpt.clear();
@@ -1492,6 +1499,6 @@ public static void inputawalbulan(){
     keluarperbulan = new Double[12];
     
 
-    System.out.println("Data reset successfully!");
+    System.out.println("Data reset!");
 }
 }
