@@ -1,5 +1,11 @@
 import java.util.Scanner;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 public class Ver1temp3 {
 // kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
@@ -7,73 +13,78 @@ public class Ver1temp3 {
     private static ArrayList<Double> trpt = new ArrayList<Double>();
     private static ArrayList<Double> util = new ArrayList<Double>();
     private static ArrayList<Double> nabung = new ArrayList<Double>();
-    private static ArrayList<Double> lainlain = new ArrayList<Double>();   
-public static void main(String[] args) {
-    Scanner s = new Scanner(System.in);
-    ArrayList<ArrayList<String>> namap = new ArrayList<>(); // nama
-        ArrayList<String> npjan = new ArrayList<String>();
-        ArrayList<String> npfeb = new ArrayList<String>();
-        ArrayList<String> npmar = new ArrayList<String>();
-        ArrayList<String> npapr = new ArrayList<String>();
-        ArrayList<String> npmei = new ArrayList<String>();
-        ArrayList<String> npjun = new ArrayList<String>();
-        ArrayList<String> npjul = new ArrayList<String>();
-        ArrayList<String> npagt = new ArrayList<String>();
-        ArrayList<String> npsep = new ArrayList<String>();
-        ArrayList<String> npoct = new ArrayList<String>();
-        ArrayList<String> npnov = new ArrayList<String>();
-        ArrayList<String> npdec = new ArrayList<String>();
-    int nextmonth = 0;  
-    ArrayList<String> nptemp = new ArrayList<String>();
-    ArrayList<ArrayList<String>> tipep= new ArrayList<>();  // tipe
-        ArrayList<String> tpjan = new ArrayList<String>();
-        ArrayList<String> tpfeb = new ArrayList<String>();
-        ArrayList<String> tpmar = new ArrayList<String>();
-        ArrayList<String> tpapr = new ArrayList<String>();
-        ArrayList<String> tpmei = new ArrayList<String>();
-        ArrayList<String> tpjun = new ArrayList<String>();
-        ArrayList<String> tpjul = new ArrayList<String>();
-        ArrayList<String> tpagt = new ArrayList<String>();
-        ArrayList<String> tpsep = new ArrayList<String>();
-        ArrayList<String> tpoct = new ArrayList<String>();
-        ArrayList<String> tpnov = new ArrayList<String>();
-        ArrayList<String> tpdec = new ArrayList<String>();
-    ArrayList<String> tptemp = new ArrayList<String>();
-    ArrayList<ArrayList<Double>> hartotp = new ArrayList<>();  //harga
-        ArrayList<Double> hpjan = new ArrayList<Double>();
-        ArrayList<Double> hpfeb = new ArrayList<Double>();
-        ArrayList<Double> hpmar = new ArrayList<Double>();        
-        ArrayList<Double> hpapr = new ArrayList<Double>();
-        ArrayList<Double> hpmei = new ArrayList<Double>();
-        ArrayList<Double> hpjun = new ArrayList<Double>();
-        ArrayList<Double> hpjul = new ArrayList<Double>();
-        ArrayList<Double> hpagt = new ArrayList<Double>();
-        ArrayList<Double> hpsep = new ArrayList<Double>();
-        ArrayList<Double> hpoct = new ArrayList<Double>();
-        ArrayList<Double> hpnov = new ArrayList<Double>();
-        ArrayList<Double> hpdec = new ArrayList<Double>();
-    ArrayList<Double> hptemp = new ArrayList<Double>();
-    Double[] sisall = new Double[12]; //lainlain
-    Double[] sisamk = new Double[12]; //makanan
-    Double[] sisatp = new Double[12]; //transportasi
-    Double[] sisaut = new Double[12]; //utilitas
-    Double[] tabungperbulan = new Double[12];
-    Double[] keluarperbulan = new Double[12];
-    Double totalkeluarmk = 0.0;
-    Double totalkeluartp = 0.0;
-    Double totalkeluarut = 0.0;
-    Double totalkeluarll = 0.0;
-    Double totaltabung = 0.0;
-    Double sisalltemp = 0.0;
-    Double sisamktemp = 0.0;
-    Double sisatptemp = 0.0;
-    Double sisauttemp = 0.0;
-    Double tttemp = 0.0;   
-    int menu;
-    int bulancounter = 1;
-    int bulan4arrlist = 12;
-    int pertamangisibulan = 0; // nanti kalau ganti bulan manual reset ke 0 lagi, for bensin, makan, etc
+    private static ArrayList<Double> lainlain = new ArrayList<Double>();
 
+    private static ArrayList<ArrayList<String>> namap = new ArrayList<>(); // nama   
+    private static ArrayList<String> npjan = new ArrayList<String>();
+    private static ArrayList<String> npfeb = new ArrayList<String>();
+    private static ArrayList<String> npmar = new ArrayList<String>();
+    private static ArrayList<String> npapr = new ArrayList<String>();
+    private static ArrayList<String> npmei = new ArrayList<String>();
+    private static ArrayList<String> npjun = new ArrayList<String>();
+    private static ArrayList<String> npjul = new ArrayList<String>();
+    private static ArrayList<String> npagt = new ArrayList<String>();
+    private static ArrayList<String> npsep = new ArrayList<String>();
+    private static ArrayList<String> npoct = new ArrayList<String>();
+    private static ArrayList<String> npnov = new ArrayList<String>();
+    private static ArrayList<String> npdec = new ArrayList<String>();
+    private static ArrayList<String> nptemp = new ArrayList<String>();
+
+    private static ArrayList<ArrayList<String>> tipep= new ArrayList<>();  // tipe
+    private static ArrayList<String> tpjan = new ArrayList<String>();
+    private static ArrayList<String> tpfeb = new ArrayList<String>();
+    private static ArrayList<String> tpmar = new ArrayList<String>();
+    private static ArrayList<String> tpapr = new ArrayList<String>();
+    private static ArrayList<String> tpmei = new ArrayList<String>();
+    private static ArrayList<String> tpjun = new ArrayList<String>();
+    private static ArrayList<String> tpjul = new ArrayList<String>();
+    private static ArrayList<String> tpagt = new ArrayList<String>();
+    private static ArrayList<String> tpsep = new ArrayList<String>();
+    private static ArrayList<String> tpoct = new ArrayList<String>();
+    private static ArrayList<String> tpnov = new ArrayList<String>();
+    private static ArrayList<String> tpdec = new ArrayList<String>();
+    private static ArrayList<String> tptemp = new ArrayList<String>();
+
+    private static ArrayList<ArrayList<Double>> hartotp = new ArrayList<>();  //harga
+    private static ArrayList<Double> hpjan = new ArrayList<Double>();
+    private static ArrayList<Double> hpfeb = new ArrayList<Double>();
+    private static ArrayList<Double> hpmar = new ArrayList<Double>();        
+    private static ArrayList<Double> hpapr = new ArrayList<Double>();
+    private static ArrayList<Double> hpmei = new ArrayList<Double>();
+    private static ArrayList<Double> hpjun = new ArrayList<Double>();
+    private static ArrayList<Double> hpjul = new ArrayList<Double>();
+    private static ArrayList<Double> hpagt = new ArrayList<Double>();
+    private static ArrayList<Double> hpsep = new ArrayList<Double>();
+    private static ArrayList<Double> hpoct = new ArrayList<Double>();
+    private static ArrayList<Double> hpnov = new ArrayList<Double>();
+    private static ArrayList<Double> hpdec = new ArrayList<Double>();
+    private static ArrayList<Double> hptemp = new ArrayList<Double>();
+
+    private static Double[] sisall = new Double[12]; //lainlain
+    private static Double[] sisamk = new Double[12]; //makanan
+    private static Double[] sisatp = new Double[12]; //transportasi
+    private static Double[] sisaut = new Double[12]; //utilitas
+    private static Double[] tabungperbulan = new Double[12];
+    private static Double[] keluarperbulan = new Double[12];
+    private static Double totalkeluarmk = 0.0;
+    private static Double totalkeluartp = 0.0;
+    private static Double totalkeluarut = 0.0;
+    private static Double totalkeluarll = 0.0;
+    private static Double totaltabung = 0.0;
+    private static Double sisalltemp = 0.0;
+    private static Double sisamktemp = 0.0;
+    private static Double sisatptemp = 0.0;
+    private static Double sisauttemp = 0.0;
+    private static Double tttemp = 0.0;
+
+    private static int bulancounter = 1;
+    private static int pertamangisibulan = 0; // nanti kalau ganti bulan manual reset ke 0 lagi, for bensin, makan, etc
+
+
+public static void main(String[] args) {
+    loadData();
+    Scanner s = new Scanner(System.in);
+    int menu; // input nomer menu
     System.out.println("================================");
     System.out.println("Selamat datang di StudentFinCalc");
 
@@ -897,7 +908,7 @@ public static void main(String[] args) {
     else if (menu == 5){ //ganti bulan
     System.out.println("Peringatan: Tabel pengeluaran bulan ini tidak bisa diedit setelah pindah bulan!");
     System.out.print("Apakah Anda yakin mau pindah bulan? (Y/N): ");
-    String yesno4 = s.next()+s.nextLine();
+    String yesno4 = s.nextLine().trim();
     while (!yesno4.equalsIgnoreCase("y") && !yesno4.equalsIgnoreCase("n")){
     System.out.print("Input hanya bisa Y/N! Apakah Anda yakin mau pindah bulan?: ");
     yesno4 = s.next()+s.nextLine();
@@ -1016,7 +1027,6 @@ public static void main(String[] args) {
     keluarperbulan[bulancounter - 1] = masukan.get(bulancounter - 1) - tabungperbulan[bulancounter - 1];
     totaltabung = totaltabung + sisalltemp + sisamktemp + sisatptemp + sisauttemp; //sisa gets added to tabungan
     bulancounter++; //next month
-    nextmonth++; //next time input transferred is for next month
     sisalltemp = 0.0; //reinitialize sisa per month
     sisamktemp = 0.0;
     sisatptemp = 0.0;
@@ -1033,6 +1043,13 @@ public static void main(String[] args) {
     }
 
     else if (menu == 6){
+    saveData();
+    System.exit(0);
+    }
+
+    else if (menu == 7){
+    resetData();
+    saveData();
     System.exit(0);
     }
 
@@ -1041,7 +1058,7 @@ public static void main(String[] args) {
     continue;
     }
 
-//break;
+break;
 } catch (Exception e){
 System.out.println("Input error, try again!");
 continue;
@@ -1050,7 +1067,8 @@ continue;
 } // bulancounter
 
 } //psvm main ends
-    public static void inputawalbulan(){
+    
+public static void inputawalbulan(){
     Scanner s = new Scanner(System.in);
         System.out.println("================================");
         Double masn = 1.0; Double mkn1 = 1.0; Double trpt1 = 1.0; Double util1 = 1.0; Double nb1 = 1.0; Double sisatemp;
@@ -1144,7 +1162,6 @@ continue;
     nabung.add(nb1);
     }
 
-
     private static String nobulan(int nomerbulan) {
     switch (nomerbulan) {
         case 1:  return "Januari";
@@ -1172,4 +1189,309 @@ continue;
         }
     }
 
+    private static void saveData() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("budget_data.dat"))) {
+            oos.writeObject(masukan); // Serialize and save ArrayList
+            oos.writeObject(mkn);
+            oos.writeObject(trpt);
+            oos.writeObject(util);
+            oos.writeObject(nabung);
+            oos.writeObject(lainlain);
+    
+            oos.writeObject(namap);
+            oos.writeObject(npjan);
+            oos.writeObject(npfeb);
+            oos.writeObject(npmar);
+            oos.writeObject(npapr);
+            oos.writeObject(npmei);
+            oos.writeObject(npjun);
+            oos.writeObject(npjul);
+            oos.writeObject(npagt);
+            oos.writeObject(npsep);
+            oos.writeObject(npoct);
+            oos.writeObject(npnov);
+            oos.writeObject(npdec);
+            oos.writeObject(nptemp);
+    
+            oos.writeObject(tipep);
+            oos.writeObject(tpjan);
+            oos.writeObject(tpfeb);
+            oos.writeObject(tpmar);
+            oos.writeObject(tpapr);
+            oos.writeObject(tpmei);
+            oos.writeObject(tpjun);
+            oos.writeObject(tpjul);
+            oos.writeObject(tpagt);
+            oos.writeObject(tpsep);
+            oos.writeObject(tpoct);
+            oos.writeObject(tpnov);
+            oos.writeObject(tpdec);
+            oos.writeObject(tptemp);
+    
+            oos.writeObject(hartotp);
+            oos.writeObject(hpjan);
+            oos.writeObject(hpfeb);
+            oos.writeObject(hpmar);
+            oos.writeObject(hpapr);
+            oos.writeObject(hpmei);
+            oos.writeObject(hpjun);
+            oos.writeObject(hpjul);
+            oos.writeObject(hpagt);
+            oos.writeObject(hpsep);
+            oos.writeObject(hpoct);
+            oos.writeObject(hpnov);
+            oos.writeObject(hpdec);
+            oos.writeObject(hptemp);
+    
+            oos.writeObject(sisall);
+            oos.writeObject(sisamk);
+            oos.writeObject(sisatp);
+            oos.writeObject(sisaut);
+            oos.writeObject(tabungperbulan);
+            oos.writeObject(keluarperbulan);
+    
+            oos.writeDouble(totalkeluarmk);
+            oos.writeDouble(totalkeluartp);
+            oos.writeDouble(totalkeluarut);
+            oos.writeDouble(totalkeluarll);
+            oos.writeDouble(totaltabung);
+            oos.writeDouble(sisalltemp);
+            oos.writeDouble(sisamktemp);
+            oos.writeDouble(sisatptemp);
+            oos.writeDouble(sisauttemp);
+            oos.writeDouble(tttemp);
+            
+            oos.writeInt(bulancounter);
+            oos.writeInt(pertamangisibulan);
+    
+            // Save other relevant data
+            System.out.println("Data saved successfully!");
+        } catch (IOException e) {
+            System.out.println("Error saving data: " + e.getMessage());
+        }
+    }
+
+    private static void loadData() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("budget_data.dat"))) {
+            // Deserialize and load ArrayList
+            masukan = (ArrayList<Double>) ois.readObject();
+            mkn = (ArrayList<Double>) ois.readObject();
+            trpt = (ArrayList<Double>) ois.readObject();
+            util = (ArrayList<Double>) ois.readObject();
+            nabung = (ArrayList<Double>) ois.readObject();
+            lainlain = (ArrayList<Double>) ois.readObject();
+    
+            // Deserialize and load ArrayList of ArrayList<String>
+            namap = (ArrayList<ArrayList<String>>) ois.readObject();
+            npjan = (ArrayList<String>) ois.readObject();
+            npfeb = (ArrayList<String>) ois.readObject();
+            npmar = (ArrayList<String>) ois.readObject();
+            npapr = (ArrayList<String>) ois.readObject();
+            npmei = (ArrayList<String>) ois.readObject();
+            npjun = (ArrayList<String>) ois.readObject();
+            npjul = (ArrayList<String>) ois.readObject();
+            npagt = (ArrayList<String>) ois.readObject();
+            npsep = (ArrayList<String>) ois.readObject();
+            npoct = (ArrayList<String>) ois.readObject();
+            npnov = (ArrayList<String>) ois.readObject();
+            npdec = (ArrayList<String>) ois.readObject();
+            nptemp = (ArrayList<String>) ois.readObject();
+    
+            // Deserialize and load ArrayList of ArrayList<String>
+            tipep = (ArrayList<ArrayList<String>>) ois.readObject();
+            tpjan = (ArrayList<String>) ois.readObject();
+            tpfeb = (ArrayList<String>) ois.readObject();
+            tpmar = (ArrayList<String>) ois.readObject();
+            tpapr = (ArrayList<String>) ois.readObject();
+            tpmei = (ArrayList<String>) ois.readObject();
+            tpjun = (ArrayList<String>) ois.readObject();
+            tpjul = (ArrayList<String>) ois.readObject();
+            tpagt = (ArrayList<String>) ois.readObject();
+            tpsep = (ArrayList<String>) ois.readObject();
+            tpoct = (ArrayList<String>) ois.readObject();
+            tpnov = (ArrayList<String>) ois.readObject();
+            tpdec = (ArrayList<String>) ois.readObject();
+            tptemp = (ArrayList<String>) ois.readObject();
+    
+            // Deserialize and load ArrayList of ArrayList<Double>
+            hartotp = (ArrayList<ArrayList<Double>>) ois.readObject();
+            hpjan = (ArrayList<Double>) ois.readObject();
+            hpfeb = (ArrayList<Double>) ois.readObject();
+            hpmar = (ArrayList<Double>) ois.readObject();
+            hpapr = (ArrayList<Double>) ois.readObject();
+            hpmei = (ArrayList<Double>) ois.readObject();
+            hpjun = (ArrayList<Double>) ois.readObject();
+            hpjul = (ArrayList<Double>) ois.readObject();
+            hpagt = (ArrayList<Double>) ois.readObject();
+            hpsep = (ArrayList<Double>) ois.readObject();
+            hpoct = (ArrayList<Double>) ois.readObject();
+            hpnov = (ArrayList<Double>) ois.readObject();
+            hpdec = (ArrayList<Double>) ois.readObject();
+            hptemp = (ArrayList<Double>) ois.readObject();
+    
+            // Deserialize and load arrays
+            Object obj = ois.readObject();
+            if (obj instanceof ArrayList) {
+                ArrayList<?> list = (ArrayList<?>) obj;
+                sisall = list.toArray(new Double[12]);
+            } else if (obj instanceof Double[]) {
+                sisall = (Double[]) obj;
+            } else {
+                // Handle the case where the object has an unexpected type.
+                // You might want to log an error or throw an exception.
+                throw new RuntimeException("Unexpected object type during deserialization");
+            }
+
+            Object objSisamk = ois.readObject();
+            if (objSisamk instanceof ArrayList) {
+                ArrayList<?> listSisamk = (ArrayList<?>) objSisamk;
+                sisamk = listSisamk.toArray(new Double[12]);
+            } else if (objSisamk instanceof Double[]) {
+                sisamk = (Double[]) objSisamk;
+            } else {
+                throw new RuntimeException("Unexpected object type during deserialization for sisamk");
+            }
+
+            Object objSisatp = ois.readObject();
+            Object objSisaut = ois.readObject();
+            Object objTabungperbulan = ois.readObject();
+            Object objKeluarperbulan = ois.readObject();
+
+            if (objSisatp instanceof ArrayList) {
+            ArrayList<?> listSisatp = (ArrayList<?>) objSisatp;
+                sisatp = listSisatp.toArray(new Double[12]);
+            } else if (objSisatp instanceof Double[]) {
+            sisatp = (Double[]) objSisatp;
+            } else {
+           throw new RuntimeException("Unexpected object type during deserialization for sisatp");
+            }
+
+        if (objSisaut instanceof ArrayList) {
+        ArrayList<?> listSisaut = (ArrayList<?>) objSisaut;
+        sisaut = listSisaut.toArray(new Double[12]);
+        } else if (objSisaut instanceof Double[]) {
+           sisaut = (Double[]) objSisaut;
+        } else {
+        throw new RuntimeException("Unexpected object type during deserialization for sisaut");
+        }
+
+        if (objTabungperbulan instanceof ArrayList) {
+        ArrayList<?> listTabungperbulan = (ArrayList<?>) objTabungperbulan;
+           tabungperbulan = listTabungperbulan.toArray(new Double[12]);
+        } else if (objTabungperbulan instanceof Double[]) {
+        tabungperbulan = (Double[]) objTabungperbulan;
+        } else {
+        throw new RuntimeException("Unexpected object type during deserialization for tabungperbulan");
+        }
+
+        if (objKeluarperbulan instanceof ArrayList) {
+        ArrayList<?> listKeluarperbulan = (ArrayList<?>) objKeluarperbulan;
+        keluarperbulan = listKeluarperbulan.toArray(new Double[12]);
+        } else if (objKeluarperbulan instanceof Double[]) {
+        keluarperbulan = (Double[]) objKeluarperbulan;
+       } else {
+        throw new RuntimeException("Unexpected object type during deserialization for keluarperbulan");
+        }
+    
+            // Load doubles and integers
+            totalkeluarmk = ois.readDouble();
+            totalkeluartp = ois.readDouble();
+            totalkeluarut = ois.readDouble();
+            totalkeluarll = ois.readDouble();
+            totaltabung = ois.readDouble();
+            sisalltemp = ois.readDouble();
+            sisamktemp = ois.readDouble();
+            sisatptemp = ois.readDouble();
+            sisauttemp = ois.readDouble();
+            tttemp = ois.readDouble();
+    
+            bulancounter = ois.readInt();
+            pertamangisibulan = ois.readInt();
+    
+            // Load other relevant data
+            System.out.println("Data loaded successfully!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading data: " + e.getMessage());
+        }
+    }
+
+    private static void resetData() {
+    masukan.clear();
+    mkn.clear();
+    trpt.clear();
+    util.clear();
+    nabung.clear();
+    lainlain.clear();
+
+    namap.clear();
+    npjan.clear();
+    npfeb.clear();
+    npmar.clear();
+    npapr.clear();
+    npmei.clear();
+    npjun.clear();
+    npjul.clear();
+    npagt.clear();
+    npsep.clear();
+    npoct.clear();
+    npnov.clear();
+    npdec.clear();
+    nptemp.clear();
+
+    tipep.clear();
+    tpjan.clear();
+    tpfeb.clear();
+    tpmar.clear();
+    tpapr.clear();
+    tpmei.clear();
+    tpjun.clear();
+    tpjul.clear();
+    tpagt.clear();
+    tpsep.clear();
+    tpoct.clear();
+    tpnov.clear();
+    tpdec.clear();
+    tptemp.clear();
+
+    hartotp.clear();
+    hpjan.clear();
+    hpfeb.clear();
+    hpmar.clear();
+    hpapr.clear();
+    hpmei.clear();
+    hpjun.clear();
+    hpjul.clear();
+    hpagt.clear();
+    hpsep.clear();
+    hpoct.clear();
+    hpnov.clear();
+    hpdec.clear();
+    hptemp.clear();
+
+    Arrays.fill(sisall, 0.0);
+    Arrays.fill(sisamk, 0.0);
+    Arrays.fill(sisatp, 0.0);
+    Arrays.fill(sisaut, 0.0);
+
+    sisalltemp = 0.0;
+    sisamktemp = 0.0;
+    sisatptemp = 0.0;
+    sisauttemp = 0.0;
+    tttemp = 0.0;
+
+    bulancounter = 1;
+    pertamangisibulan = 0;
+
+    totalkeluarmk = 0.0;
+    totalkeluartp = 0.0;
+    totalkeluarut = 0.0;
+    totalkeluarll = 0.0;
+    totaltabung = 0.0;
+
+    tabungperbulan = new Double[12];
+    keluarperbulan = new Double[12];
+    
+
+    System.out.println("Data reset successfully!");
+}
 }
