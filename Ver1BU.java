@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 public class VerFinal {
+// kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
     private static ArrayList<Double> mkn = new ArrayList<Double>();
     private static ArrayList<Double> trpt = new ArrayList<Double>();
@@ -597,7 +598,7 @@ public static void main(String[] args) {
     System.out.println("3. Keluar");
     System.out.print("Pilih: ");
     int input2  = s.nextInt();
-    while (input2 != 1 && input2 != 2 ){
+    while (input2 != 1 && input2 != 2  && input2 != 3){
     System.out.print("Pilihan hanya 1 atau 2! Pilih: ");
     input2  = s.nextInt();
     }
