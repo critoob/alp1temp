@@ -396,6 +396,10 @@ public static void main(String[] args) {
         }
     System.out.print("Input harga total pengeluaran: ");
     Double inputhtp= s.nextDouble();
+        while (inputhtp <= 0){
+        System.out.print("Input invalid! Input harga total pengeluaran: ");
+        inputhtp= s.nextDouble();
+        }
     //sorts out pengeluaran per    
     if (inputtp.equals("1")){
     Double sisatempcopy = sisamktemp;
@@ -1208,8 +1212,8 @@ public static void main(String[] args) {
     }
     save();
 } catch (Exception e){
-System.out.println("Input error, try again!");
-continue;
+System.out.println("Input error, restarting!");
+break;
 }
 
 } // bulancounter
