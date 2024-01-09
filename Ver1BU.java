@@ -6,7 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-public class VerFinal {
+public class Ver1BU {
 // kurang indexsearch, edit
     private static ArrayList<Double> masukan = new ArrayList<Double>();
     private static ArrayList<Double> mkn = new ArrayList<Double>();
@@ -84,7 +84,7 @@ public class VerFinal {
 public static void main(String[] args) {
     datamasuk();
     Scanner s = new Scanner(System.in);
-    int menu; // input nomer menu
+    String menu; // input nomer menu
     System.out.println("================================");
     System.out.println("Selamat datang di StudentFinCalc");
 
@@ -192,12 +192,12 @@ public static void main(String[] args) {
         while (true){
         System.out.println("1. Lihat financial report bulan - bulan sebelumnya\n2. Exit\n3. Reset");
         System.out.print("Pilih: ");
-        int menufinal = s.nextInt();
-        while (menufinal < 1 || menufinal > 3){
-            System.out.print("Input invalid! Pilih: ");
-            menufinal = s.nextInt();
+        String menufinal = s.next()+s.nextLine();
+        while (!menufinal.equals("1") && !menufinal.equals("2") && !menufinal.equals("3")){
+            System.out.print("Input hanya bisa 1, 2, atau 3! Pilih: ");
+            menufinal = s.next()+s.nextLine();
         }
-        if (menufinal == 1){
+        if (menufinal.equals("1")){
         System.out.print("Input bulan yang ingin dilihat reportnya (1 - Jan, 2 - Feb, dst): ");
         int inputbln3 = s.nextInt();
         if (inputbln3 >= 1 && inputbln3 <= namap.size()) {
@@ -286,12 +286,12 @@ public static void main(String[] args) {
             System.out.println("Bulan invalid");
         }
         }        
-        else if (menufinal == 2){
+        else if (menufinal.equals("2")){
         System.out.println("See you next time!");
         save();
         System.exit(0);
         }
-        else if (menufinal == 3){
+        else if (menufinal.equals("3")){
         System.out.print("Apakah Anda yakin? Tulis 'ILoveUC' untuk reset: ");
         String yesnofinal = s.next()+s.nextLine();
             if (yesnofinal.equalsIgnoreCase("ILoveUC")){
@@ -321,9 +321,9 @@ public static void main(String[] args) {
         }
     System.out.println("6. Exit");
     System.out.print("Pilih: ");
-    menu = s.nextInt();
+    menu = s.next()+s.nextLine();
 
-    if (menu == 1){
+    if (menu.equals("1")){
     int reset = 0;
         while (pertamangisibulan == 0){ //input target pengeluaran per bulan
         inputawalbulan();
@@ -590,7 +590,7 @@ public static void main(String[] args) {
     System.out.println("");
     }
 
-    else if (menu == 2){
+    else if (menu.equals("2")){
         if (pertamangisibulan == 0){
         System.out.println("Buat tabel baru terlebih dahulu!");
         System.out.println("");
@@ -601,12 +601,12 @@ public static void main(String[] args) {
     System.out.println("2. Edit pemasukan dan tabungan");
     System.out.println("3. Keluar");
     System.out.print("Pilih: ");
-    int input2  = s.nextInt();
-    while (input2 != 1 && input2 != 2  && input2 != 3){
-    System.out.print("Pilihan hanya 1 atau 2! Pilih: ");
-    input2  = s.nextInt();
+    String input2  = s.next()+s.nextLine();
+    while (!input2.equals("1") && !input2.equals("2")  && !input2.equals("3")){
+    System.out.print("Pilihan hanya 1, 2, atau 3! Pilih: ");
+    input2  = s.next()+s.nextLine();
     }
-        if (input2 == 1){
+        if (input2.equals("1")){
         bulan = nobulan(bulancounter);
         System.out.println(""); //tabel lama here
         System.out.println("================================");
@@ -755,7 +755,7 @@ public static void main(String[] args) {
         }                
         }
         }
-        else if (input2 == 2){
+        else if (input2.equals("2")){
         System.out.println("");
         if (sisamktemp >= 0){
         System.out.print("Sisa uang Makan/Minum: Rp. ");
@@ -884,12 +884,12 @@ public static void main(String[] args) {
         System.out.printf("%.0f\n", sisalltemp);
 
         }
-        else if (input2 == 3){
+        else if (input2.equals(menu)){
         }
     System.out.println("\n");
     }
 
-    else if (menu == 3){
+    else if (menu.equals("3")){
     bulan = nobulan(bulancounter);
         if (pertamangisibulan == 0){
         System.out.println("Buat tabel baru terlebih dahulu!");
@@ -962,7 +962,7 @@ public static void main(String[] args) {
     System.out.println("");
     }
 
-    else if (menu == 4){
+    else if (menu.equals("4")){
         if (bulancounter == 1){
         System.out.println("Ini adalah bulan pertama inputan Anda!");
         }
@@ -1058,7 +1058,7 @@ public static void main(String[] args) {
     System.out.println("");
     }
 
-    else if (menu == 5){ //ganti bulan
+    else if (menu.equals("5")){ //ganti bulan
     System.out.println("Peringatan: Tabel pengeluaran bulan ini tidak bisa diedit setelah pindah bulan!");
     System.out.print("Apakah Anda yakin mau pindah bulan? (Y/N): ");
     String yesno4 = s.nextLine().trim();
@@ -1195,12 +1195,12 @@ public static void main(String[] args) {
     }
     }
 
-    else if (menu == 6){
+    else if (menu.equals("6")){
     save();
     System.exit(0);
     }
 
-    else if (menu == 150906){
+    else if (menu.equals("150906")){
     reset();
     save();
     System.exit(0);
@@ -1213,7 +1213,7 @@ public static void main(String[] args) {
     save();
 } catch (Exception e){
 System.out.println("Input error, restarting!");
-break;
+continue;
 }
 
 } // bulancounter
